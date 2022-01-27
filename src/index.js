@@ -1,7 +1,35 @@
 import getProductList from "./mock/data.js";
 import renderGoodsList from "./showcase.js";
-import "./index.css";
+import { send } from './utils.js'
 
-const productList = getProductList(20);
 
-renderGoodsList(productList);
+function getRandomInRange(min,max){
+  return Math.floor(Math.random()* (max-min + 1))+min;
+}
+
+
+const API_URL = 'http://localhost:3000/api/v1'
+
+let productList = [];
+let cart = [];
+
+send((error) => { console.log(err) }, (res) => { 
+  let list = JSON.parse(res);
+  productList = list;
+  renderGoodsList(productList);
+}, `${API_URL}/catalog`)
+
+
+
+// Пользователь добавляет товар в корзину
+let buyed = {id: 5, title: "new", price: 999};
+send((error) => { console.log(err) }, (res) => {
+  cart.push(buyed)
+}, `${API_URL}/cart`, 'POST', JSON.stringify(buyed), {"Content-Type": "application/json"})
+
+
+//Удаление товара
+let deleted = getRandomInRange(0, (cart.length-1))
+send((error)=>{console.log(err) }, (res)=>{
+  cart.splice(deleted)
+}, `${API_URL}/cart`, 'DELETE', JSON.stringify(deleted), {"Content-Type": "application/json"})
