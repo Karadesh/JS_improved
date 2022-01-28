@@ -69,7 +69,8 @@ app.delete('/api/v1/cart', (req, res) => {
   fs.readFile(cart_path, 'utf-8', (err, data) => {
     if(!err) {
       const cart = JSON.parse(data);
-      cart.splice(req.body);
+      const product_del = cart.find((item) => item.id == req.body)
+      cart.splice(product_del);
       fs.writeFile(cart_path, JSON.stringify(cart), 'utf-8', (err, data) => {
         res.sendStatus(200)
       })
