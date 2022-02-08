@@ -1,0 +1,11 @@
+ body {
+    font:100% Times, sans-serif;
+    color: #333;
+    background: grey;
+}
+
+.showcase {
+    background-color: #592;
+    width: 90%;
+    color: #333;
+}
