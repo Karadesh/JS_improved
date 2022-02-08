@@ -22,24 +22,6 @@ app.get('/api/v1/catalog', (req, res) => {
   })
 })
 
-app.get('/api/v1/catalog/:id', (req, res) => {
-  fs.readFile(catalog_path, 'utf-8', (err, data) => {
-    if(!err) {
-      const catalog = JSON.parse(data);
-      const product = catalog.find((item) => item.id == req.params.id)
-
-      if(!product) {
-        res.status(404).send('Not Found');
-        return;
-      }
-
-      res.send(JSON.stringify(product));
-    } else {
-      res.status(500).send(err)
-    }
-  })
-})
-
 app.get('/api/v1/cart', (req, res) => {
   fs.readFile(cart_path, 'utf-8', (err, data) => {
     if(!err) {
@@ -50,7 +32,6 @@ app.get('/api/v1/cart', (req, res) => {
   })
 })
 
-
 app.post('/api/v1/cart', (req, res) => {
   fs.readFile(cart_path, 'utf-8', (err, data) => {
     if(!err) {
@@ -58,21 +39,6 @@ app.post('/api/v1/cart', (req, res) => {
       cart.push(req.body);
       fs.writeFile(cart_path, JSON.stringify(cart), 'utf-8', (err, data) => {
         res.sendStatus(201)
-      })
-    } else {
-      res.status(500).send(err)
-    }
-  })
-})
-
-app.delete('/api/v1/cart', (req, res) => {
-  fs.readFile(cart_path, 'utf-8', (err, data) => {
-    if(!err) {
-      const cart = JSON.parse(data);
-      const product_del = cart.find((item) => item.id == req.body)
-      cart.splice(product_del);
-      fs.writeFile(cart_path, JSON.stringify(cart), 'utf-8', (err, data) => {
-        res.sendStatus(200)
       })
     } else {
       res.status(500).send(err)
