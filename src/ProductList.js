@@ -1,30 +1,32 @@
-export default class ProductList {
-  constructor(list) {
-    this.list = list
-  }
+import EventEmitter from "./EventEmitter.js";
 
-  getList() {
-    return this.list;
-  }
-
-  find(id) {
-    const index = this.list.findIndex((item) => item.id === id);
-
-    if(index >= 0) {
-      return this.list[index]
+export default class ProductList extends EventEmitter{
+    constructor(){
+        super()
+        this.list = [];
     }
 
-    return false;
-  }
-
-  remove(id) {
-    const index = this.list.findIndex((item) => item.id === id);
-
-    if(index >= 0) {
-      this.list = [...this.list.slice(0, index), ...this.list.slice(index + 1)]
-      return true;
+    set(list) {
+        this.list = [...this.list, ...list] 
+        this.emit('onSet', this.get())
     }
 
-    return false;
-  }
+    get() {
+        return [...this.list];
+    }
+
+    getById(id) {
+        return Object.assign({}, this.list.find((item) => item.id === id))
+    }
+
+    add(item) {
+        this.list.push(item);
+        this.emit('onAdd', item)
+    }
+
+    remove(id) {
+        const idx = this.list.find((item) => item.id === id);
+        this.list.splice(idx, 1)
+        this.emit('onRemove', id)
+    }
 }

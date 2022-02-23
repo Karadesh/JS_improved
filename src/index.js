@@ -1,25 +1,13 @@
-import ApiHandler from './ApiHandler.js';
-import CartModel from './CartModel.js';
-import ShowcaseModel from './ShowcaseModel.js';
-import EventEmitter from './EventEmitter.js'
+import Cart from './Cart.js'
+import Catalog from './Catalog.js';
+import CatalogPresenter from './CatalogPresenter.js';
 
-const API_URL = 'http://localhost:3000/api/v1'
+const API_URL = '/api/v1'
 
-const api = new ApiHandler(API_URL)
-const eventEmmiter = new EventEmitter()
+const cartModel = new Cart();
+const catalogModel = new Catalog(API_URL, cartModel);
 
-const cart = new CartModel(api, eventEmmiter)
-const showcase = new ShowcaseModel(api, eventEmmiter, cart)
+const catalogPresenter = new CatalogPresenter(catalogModel, cartModel)
 
-eventEmmiter.subscribe('showcaseFeched', (data) => {
-  console.log(data)
-})
-
-eventEmmiter.subscribe('cartFeched', (data) => {
-  console.log(data)
-})
-
-showcase.fetch()
-cart.fetch()
-
-
+cartModel.init();
+catalogModel.init();
