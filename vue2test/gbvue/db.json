@@ -1,0 +1,52 @@
+{
+  "products": [
+    {
+      "image": "1.jpg",
+      "name": "Barbara",
+      "price": 3900,
+      "article": "T1",
+      "available": true,
+      "category": "dakimakura"
+    },
+    {
+      "image": "2.jpg",
+      "name": "Hu Tao",
+      "price": 4350,
+      "article": "T2",
+      "available": true,
+      "category": "dakimakura"
+    },
+    {
+      "image": "3.jpg",
+      "name": "Kequing",
+      "price": 4200,
+      "article": "T3",
+      "available": false,
+      "category": "dakimakura"
+    },
+    {
+      "image": "4.jpg",
+      "name": "Xiao",
+      "price": 4200,
+      "article": "T4",
+      "available": true,
+      "category": "dakimakura"
+    },
+    {
+      "image": "5.jpg",
+      "name": "Yae Miko",
+      "price": 4500,
+      "article": "T5",
+      "available": false,
+      "category": "dakimakura"
+    },
+    {
+      "image": "6.jpg",
+      "name": "Zhjongli",
+      "price": 4700,
+      "article": "T6",
+      "available": true,
+      "category": "dakimakura"
+    }
+  ]
+}
