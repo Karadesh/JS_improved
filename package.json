@@ -10,12 +10,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.26.0",
     "css-loader": "^6.5.1",
     "express": "^4.17.2",
     "lodash": "^4.17.21",
     "mini-css-extract-plugin": "^2.4.5",
     "postcss": "^8.4.5",
     "sass-loader": "^12.4.0",
+    "vuex": "^4.0.2",
     "webpack-dev-server": "^4.7.1"
   },
   "devDependencies": {
